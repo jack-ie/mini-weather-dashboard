@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(211, 238, 247);
+}
+header {
+    background-color: skyblue;
+    font-size: 75px;
+    text-align: center;
+    border:5px solid whitesmoke;
+}
+
+.btn {
+    margin-top: 1%;
+    color: white;
+    background-color: gray;
+}
+
+.container-fluid {
+    text-align: left;
+    font-size: large;
+}
