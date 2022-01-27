@@ -5,71 +5,14 @@ create button
 create function to fetch api data when button is clicked
 */
 
-// var inputField = document.querySelector('#city')
-// var button = document.querySelector('#get-weather')
-// var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}'
-
-// function fetchData(){
-//     console.log(inputField.value)
-//     var cityName = inputField.value
-//     var apiKey = '68056ac49e78d598d69105c5cc119b53'
-//     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
-//     console.log (requestUrl)
-//     fetch(requestUrl)
-//     .then(function(response){
-//         return response.json()
-//     })
-//     .then(function(weatherdata){
-//         console.log(weatherdata)
-//     })
-// }
-// button.addEventListener('click', fetchData)
-// console.log('hi')
-
-// var inputField = document.querySelector('#city')
-// var button = document.querySelector('#get-weather')
-
-// function fetchData(){
-//   var cityName = inputField.value
-//   var apiKey = '68056ac49e78d598d69105c5cc119b53'
-//   var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
-
-//   fetch(requestUrl)
-//     .then(function(response) {
-//       return response.json()
-//     })
-//     .then(function(weatherData) {
-//       console.log(weatherData)
-//       console.log(weatherData.main.temp)
-
-//       var Ktempmin = weatherData.main.temp_min
-//       var Ftempmin = (Ktempmin-273.15)*9/5 + 32
-
-//       console.log(Ftempmin)
-
-//       var Ktempmax = weatherData.main.temp_max
-//       var Ftempmax = (Ktempmax-273.15)*9/5 + 32
-
-//       console.log(Ftempmax)
-
-//     })
-// }
-
-// button.addEventListener('click', fetchData)
-/*
-test code
-*/
-
 // Array to hold search terms
 var cityNames = [];
 // Current day
 let m = moment();
 
 // Function for DOM manipulation to get search term & display search history
-
 function storeSearches() {
   $("#search-history").empty();
-
   for (var i = 0; i < cityNames.length; i++) {
     var cityBtn = $("<button>");
     cityBtn.addClass("city-btn");
@@ -77,12 +20,10 @@ function storeSearches() {
     cityBtn.text(cityNames[i]);
     $("#search-history").append(cityBtn);
   }
-
   getWeather(cityNames[cityNames.length - 1])
 }
 
 // Function to handle event when search button clicked
-
 $("#add-city").on("click", function (event) {
   event.preventDefault();
 
@@ -91,7 +32,6 @@ $("#add-city").on("click", function (event) {
     // Add city to array of city names
     cityNames.push(city);
     $("#city-input").val("");
-
     storeSearches();
   }
   else {
@@ -99,7 +39,6 @@ $("#add-city").on("click", function (event) {
     var alert = $("<p>");
     alert.text("Please enter a city.");
     $("#search-history").append(alert);
-
   }
 });
 
@@ -158,20 +97,15 @@ function currentWeather(city) {
         url: queryURL,
         method: "GET"
       }).then(function (response) {
-
         // DOM manipulation to show UV Index
         var pFour = $("<p class='uv-index'>").text("UV Index: " + response.value);
-
         weatherMain.append(pFour);
-
         $("#current-weather-display").html(weatherMain);
       })
     }
     uvIndex();
   });
 }
-
-// ISSUES: need to loop one time per day, add humidity and icon for each day, create a loop for DOM manipulation to clean up code
 
 // AJAX call using search term cityName for five-day forecast
 function fiveDayForecast(city) {
@@ -220,6 +154,7 @@ function fiveDayForecast(city) {
       iconDisplay.append(iconImg);
       $("#day-" + (i + 1)).append(iconImg);
     }
+
     function displayDates() {
       var fiveDays = [];
       var date = moment().format("MM/DD/YYYY");
@@ -242,7 +177,5 @@ function fiveDayForecast(city) {
   });
 
 }
-
-// On click function so that users can click a search history term and see its response
 
 $(document).on("click", ".city-btn", getWeather);
